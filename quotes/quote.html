@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote of  the day!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="quote-box">
+        <H2>Quote of the day!</H2>
+     <BLockquote id="quote">loading...</BLockquote>
+        <!-- <span>loading...</span> -->
+        <div class="buttons">
+            <button onclick="getquote(api_url, options)">New Quote</button>
+            <button class="tweet" onclick="tweet()"><img  src="logo-twitter-png-5860.png">Tweet</button>
+        </div>
+    </div>
+   <script>
+    const quote = document.getElementById("quote");
+    const api_url = 'https://quotes15.p.rapidapi.com/quotes/random/';
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': 'ad931e0447msha87eb6221fdfa44p1525c8jsn498f02d70b81',
+            'X-RapidAPI-Host': 'quotes15.p.rapidapi.com'
+        }
+    };
+
+    async function getquote(url, options){
+            const response = await fetch(url, options);
+            var data = await response.json();
+            console.log(data); 
+            quote.innerHTML = data.content;
+    }
+         
+     getquote(api_url, options); 
+     
+     function tweet(){
+        window.open("https://twitter.com/intent/tweet?text=" + quote.innerHTML , "Tweet window", "Width = 600", "Height = 300")
+     }
+           
+
+
+   </script>
+</body>
+</html>
